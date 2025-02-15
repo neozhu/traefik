@@ -10,6 +10,12 @@ This project demonstrates how to set up a development environment for a home lab
 - DDNS service to handle dynamic DNS
 - Basic knowledge of Docker, Traefik, and DNS management
 
+To better understand and guide you through the setup of the entire environment, please refer to these videos:
+
+- [Video 1: Traefik v3.3 - Secure Everything! Complete Tutorial](https://www.youtube.com/watch?v=CmUzMi5QLzI&list=PL77ZBY9FxekDLlyv6m6mQbgzacOlFYnm8&index=2)
+- [Video 2: Simple HTTPs for Docker! // Traefik Tutorial (updated)](https://www.youtube.com/watch?v=-hfejNXqOzA&list=PL77ZBY9FxekDLlyv6m6mQbgzacOlFYnm8&index=2)
+
+
 ## Setup Instructions
 
 
