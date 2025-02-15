@@ -35,18 +35,18 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.entrypoints=http"
-      - "traefik.http.routers.traefik.rule=Host(`traefik.blazors.app`)"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.domain`)"
       - "traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_DASHBOARD_CREDENTIALS}"
       - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
       - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
       - "traefik.http.routers.traefik.middlewares=traefik-https-redirect"
       - "traefik.http.routers.traefik-secure.entrypoints=https"
-      - "traefik.http.routers.traefik-secure.rule=Host(`traefik.blazors.app`)"
+      - "traefik.http.routers.traefik-secure.rule=Host(`traefik.domain`)"
       - "traefik.http.routers.traefik-secure.middlewares=traefik-auth"
       - "traefik.http.routers.traefik-secure.tls=true"
       - "traefik.http.routers.traefik-secure.tls.certresolver=cloudflare"
-      - "traefik.http.routers.traefik-secure.tls.domains[0].main=blazors.app"
-      - "traefik.http.routers.traefik-secure.tls.domains[0].sans=*.blazors.app"
+      - "traefik.http.routers.traefik-secure.tls.domains[0].main=domain"
+      - "traefik.http.routers.traefik-secure.tls.domains[0].sans=*.domain"
       - "traefik.http.routers.traefik-secure.service=api@internal"
   ddns:
     image: jeessy/ddns-go:latest
@@ -61,7 +61,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.ddns-secure.entrypoints=https"
-      - "traefik.http.routers.ddns-secure.rule=Host(`ddns.blazors.app`)"
+      - "traefik.http.routers.ddns-secure.rule=Host(`ddns.domain`)"
       - "traefik.http.routers.ddns-secure.tls=true"
       - "traefik.http.routers.ddns-secure.service=ddns"
       - "traefik.http.services.ddns.loadbalancer.server.port=9876"

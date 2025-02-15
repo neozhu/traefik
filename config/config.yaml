@@ -22,7 +22,7 @@ http:
     portainer:
       entryPoints:
         - "https"
-      rule: "Host(`portainer.blazors.app`)"
+      rule: "Host(`portainer.domain`)"
       middlewares:
         - default-security-headers
         - https-redirectscheme
@@ -31,7 +31,7 @@ http:
     edge:
       entryPoints:
         - "https"
-      rule: "Host(`edge.blazors.app`)"
+      rule: "Host(`edge.domain`)"
       middlewares:
         - default-security-headers
         - https-redirectscheme
