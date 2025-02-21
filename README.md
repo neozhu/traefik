@@ -33,6 +33,7 @@ Clone the repository from GitHub to get started with the setup:
 ```bash
 git clone https://github.com/neozhu/traefik.git
 cd traefik
+sudo chmod 600 acme.json
 ```
 
 ## 4. Set Up Traefik Dashboard Password
