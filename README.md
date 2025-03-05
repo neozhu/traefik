@@ -61,6 +61,31 @@ Ensure that your Traefik configuration files are correctly set to route traffic 
 ## 8. Access Services
 After configuring everything, you can access the services using the domain you set up with DDNS. Traefik will manage the reverse proxy to route traffic to the respective services.
 
+## 9 Enroll Security Engine
+enroll security engine by execing into the crowdsec container
+```bash
+docker exec crowdsec cscli console enroll -e context <YOUR-CODE>
+```
+
+## 10 Creating a Bouncer API Token
+After approving our security engine, we have to create a Traefik bouncer for our CrowdSec container. The bouncer requires an API token, which will be created in the process.
+
+To add a bouncer, run the following command:
+```bash
+docker exec crowdsec cscli bouncers add traefik-bouncer
+```
+Please make note of this API token, as we have to define it later on within a Traefik middleware configuration.
+
+## Testing Manual IP Banning
+To ban or unban an IP address manually in CrowdSec, you can use the following CSCLI commands via Docker exec:
+```bash
+# manually ban an ip address
+docker exec crowdsec cscli decisions add --ip <IP>
+
+# manually unban an ip address
+docker exec crowdsec cscli decisions remove --ip <IP>
+```
+
 ## Troubleshooting
 - If you cannot access the Traefik dashboard, check if the password was set up correctly.
 - If services are not being routed, ensure that the labels and rules in your Docker Compose file are correctly defined for Traefik.

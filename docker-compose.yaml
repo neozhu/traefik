@@ -2,6 +2,31 @@ secrets:
   cf-token:
     file: ./cf-token
 services:
+  crowdsec:
+    image: crowdsecurity/crowdsec:latest
+    container_name: crowdsec
+    environment:
+      PGID: "1000"
+      COLLECTIONS: crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/base-http-scenarios crowdsecurity/sshd crowdsecurity/linux crowdsecurity/appsec-generic-rules crowdsecurity/appsec-virtual-patching crowdsecurity/appsec-crs
+      BOUNCER_KEY_TRAEFIK: "your-key" # command: docker exec crowdsec cscli bouncers add traefik
+    labels:
+      traefik.enable: false
+    networks:
+       proxy:
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /home/dev/traefik/crowdsec/data:/var/lib/crowdsec/data
+      - /home/dev/traefik/crowdsec/etc:/etc/crowdsec
+      - /var/log/auth.log:/var/log/auth.log:ro
+      - /var/log/syslog:/var/log/syslog:ro
+      - /home/dev/traefik/logs:/var/log/traefik:ro
+    expose: 
+      - 8080
+      - 6060
+      - 7422
+    
+    restart: always
   traefik:
     image: traefik:latest # or traefik:v3.3 to pin a version
     container_name: traefik
